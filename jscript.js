@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function(){
     var $quiz = document.querySelector("#quiz");
     var $results = document.querySelector("#results");
     var $timer = document.querySelector("#timer");
+    var $submitEl = document.querySelector("#submit");
+    var $initialEl = document.querySelector("#initial");
+    // var $initialInput = document.querySelector("#initial");
     
     $startEl.addEventListener("click", function(event){
         event.preventDefault()
@@ -12,7 +15,17 @@ document.addEventListener("DOMContentLoaded", function(){
         $quiz.innerHTML = ''
         showQuestion()
     })
-    var secondsLeft = 10;
+
+    $submitEl.addEventListener("click", function(event){
+        event.preventDefault();
+  
+        console.log(event);
+    
+        $initialEl.innerText = 
+        showEnding()
+    })    
+
+    var secondsLeft = 20;
     setTime()
 
     var currentQuestion = 0
@@ -33,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     ]
     function showEnding(){
-        $quiz.innerHTML= `<h1> The End </h1>`
+        $quiz.innerHTML= `<h> Results </h2>`
         clearInterval(timerInterval);
 
         let unparsed=localStorage.getItem("highscored")
@@ -69,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     $results.innerText= "great job"
                 }else {  
                     $results.innerText= "keep at it"
+        
                 }
                 $quiz.innerHTML = ''
                 if(currentQuestion<questions.length-1){
@@ -100,8 +114,11 @@ document.addEventListener("DOMContentLoaded", function(){
     
       }, 1000);
     }
-})
 
+    
+
+})
+    
     //add names to high scores 
     //add scores 
     // create element
