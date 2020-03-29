@@ -23,7 +23,15 @@ button {
     background-color: rgb(133, 34, 153);
     color: white;
   }
-#submit{
+#form {
+    margin: auto;
+    width: 50%;
+    height: 100px;
+    text-align: center;
+
+}
+#submit {
+    margin: auto;
 	padding: 10px;
     margin: 24px;
     cursor: pointer;
@@ -33,9 +41,17 @@ button {
 }
 
 #results {
+    
     margin: auto;
+    font: lighter;
+    color: grey;
     width: 50%;
     height: 100px;
     
 }
+
+
+
+
+
 
