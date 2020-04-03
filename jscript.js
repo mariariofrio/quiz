@@ -54,23 +54,38 @@ document.addEventListener("DOMContentLoaded", function(){
         ]
         // 
         function showEnding(){
-            $results.style.display = "none";
+            let initials= prompt("put your initials in here")
+            // $results.style.display = "none";
             $quiz.innerHTML= `<h> Results </h2>`
             clearInterval(timerInterval);
             $formEl.style.display = "block";
     
             let unparsed=localStorage.getItem("highscored")
-            console.log(unparsed)
-            let toStorage;
+            console.log(initials, unparsed)
+            let toStorage;//represents all highscores
+            let gameResults={initials, secondsLeft}//object literal shorthand //represents this game's result
+            console.log("A", gameResults)
+            console.log("B"+ gameResults)
            if(unparsed){
-               console.log(`we shouldnt be here`)
                toStorage= JSON.parse(unparsed)
-               toStorage.push(secondsLeft)
+               toStorage.push(gameResults)
             }else{
-                console.log(`we should be here`)
-                toStorage=[secondsLeft]
+                toStorage=[gameResults]
            }
            console.log(toStorage)
+           toStorage.sort(function(a,b){
+               return b.secondsLeft -a.secondsLeft
+           })
+           console.log(toStorage)
+           toStorage.forEach(function(element,index){
+            let domElement= document.createElement("p")
+            domElement.innerText = `${element.initials} got a time of ${element.secondsLeft}`//template literal
+            $results.appendChild(domElement)
+           }
+
+           )
+           
+
             localStorage.setItem("highscored", JSON.stringify(toStorage))
         }
     
@@ -96,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function(){
                         $results.innerText= "Great Job"
                     }else {  
                         $results.innerText= "Wrong Answer"
-    
+                        secondsLeft -= 10
             
                     }
                     $quiz.innerHTML = ''
@@ -129,10 +144,5 @@ document.addEventListener("DOMContentLoaded", function(){
         
           }, 1000);
         }
-    
-        // function myFunction() {
-        //     document.getElementById("$timer").style.alignItems = "flex-start";
-        //   }
-        
     
     })
